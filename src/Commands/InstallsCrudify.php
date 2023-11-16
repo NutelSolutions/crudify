@@ -28,7 +28,7 @@ class InstallsCrudify extends Command
         $this->replaceDatatablesScript();
 
         // scaffold frontend
-        Artisan::call('ui bootstrap --auth', [], $this->getOutput());
+//        Artisan::call('ui bootstrap --auth', [], $this->getOutput());
         $this->insertBrowserSyncMix();
         $this->insertJsResources();
         $this->insertSassResources();
