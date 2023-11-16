@@ -40,7 +40,7 @@ class InstallsCrudify extends Command
 
     private function updateDatabaseSeeder()
     {
-        $seeder_path = database_path('seeds/DatabaseSeeder.php');
+        $seeder_path = database_path('seeders/DatabaseSeeder.php');
         $seeder_contents = file_get_contents($seeder_path);
         $updated_contents = str_replace('// $this->call(UserSeeder::class);', '$this->call(\Kejojedi\Crudify\Seeders\AdminUserSeeder::class);', $seeder_contents);
 

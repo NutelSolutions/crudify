@@ -62,7 +62,7 @@ class GeneratesCrud extends Command
             'DummyClassDatatable' => app_path('Http/Datatables'),
             'DummyClassRequest' => app_path('Http/Requests'),
             'DummyClassFactory' => database_path('factories'),
-            'DummyClassSeeder' => database_path('seeds'),
+            'DummyClassSeeder' => database_path('seeders'),
             'DummyMigration' => database_path('migrations'),
         ];
 
