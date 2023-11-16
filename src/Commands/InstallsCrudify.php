@@ -23,17 +23,25 @@ class InstallsCrudify extends Command
         Artisan::call('ide-helper:generate', [], $this->getOutput());
 
         // configure datatables
-        Artisan::call('vendor:publish --tag=datatables-html', [], $this->getOutput());
-        $this->updateDatatablesConfig();
-        $this->replaceDatatablesScript();
+//        Artisan::call('vendor:publish --tag=datatables-html', [], $this->getOutput());
+//        $this->updateDatatablesConfig();
+//        $this->replaceDatatablesScript();
+
+
+        Artisan::call(' vendor:publish --tag=laravel-pagination', [], $this->getOutput());
+        // OVERWRITE THE DEFAULT.BLADE FILE
+
+
+
+
 
         // scaffold frontend
 //        Artisan::call('ui bootstrap --auth', [], $this->getOutput());
 //        $this->insertBrowserSyncMix();
-        $this->insertJsResources();
+//        $this->insertJsResources();
 //        $this->insertSassResources();
-        $this->insertNpmPackages();
-        $this->executeNpmCommands();
+//        $this->insertNpmPackages();
+//        $this->executeNpmCommands();
 
         $this->info('Crudify installation complete.');
     }
