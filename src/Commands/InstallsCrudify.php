@@ -29,7 +29,7 @@ class InstallsCrudify extends Command
 
         // scaffold frontend
 //        Artisan::call('ui bootstrap --auth', [], $this->getOutput());
-        $this->insertBrowserSyncMix();
+//        $this->insertBrowserSyncMix();
         $this->insertJsResources();
         $this->insertSassResources();
         $this->insertNpmPackages();
