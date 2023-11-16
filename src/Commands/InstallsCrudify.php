@@ -167,7 +167,7 @@ class InstallsCrudify extends Command
 
     private function executeNpmCommands()
     {
-        exec('npm install && npm run buld');
+        exec('npm install && npm run build');
         exec('npm run build');
 
         $this->line('Executed NPM commands.');
