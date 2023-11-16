@@ -31,7 +31,7 @@ class InstallsCrudify extends Command
 //        Artisan::call('ui bootstrap --auth', [], $this->getOutput());
 //        $this->insertBrowserSyncMix();
         $this->insertJsResources();
-        $this->insertSassResources();
+//        $this->insertSassResources();
         $this->insertNpmPackages();
         $this->executeNpmCommands();
 
