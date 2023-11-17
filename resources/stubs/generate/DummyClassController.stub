@@ -16,12 +16,14 @@ class DummyClassController extends Controller
 
     public function index(Request $request)
     {
-        $query = DummyClass::query();
-        $datatables = DummyClassDatatable::make($query);
+        $search = $request->input('search');
+        $DummyVar = DummyClass::query()
+            ->when($search, function ($query) use ($search) {
+                return $query->where('name', 'like', '%' . $search . '%');
+            })
+            ->paginate(10);
 
-        return $request->ajax()
-            ? $datatables->json()
-            : view('DummyVars.index', $datatables->html());
+        return view('DummyVars.index', compact('DummyVar', 'search'));
     }
 
     public function create()

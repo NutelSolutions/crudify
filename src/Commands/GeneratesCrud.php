@@ -18,7 +18,7 @@ class GeneratesCrud extends Command
         $this->setReplaces();
         $this->createPhpFiles();
         $this->createViewFiles();
-        $this->insertNavLink();
+//        $this->insertNavLink();
         $this->insertRoutes();
 
         Artisan::call('ide-helper:generate', [], $this->getOutput());
@@ -53,13 +53,13 @@ class GeneratesCrud extends Command
 
     private function createPhpFiles()
     {
-        File::ensureDirectoryExists(app_path('Http/Datatables'));
+//        File::ensureDirectoryExists(app_path('Http/Datatables'));
         File::ensureDirectoryExists(app_path('Http/Requests'));
 
         $files = [
             'DummyClass' => app_path(),
             'DummyClassController' => app_path('Http/Controllers'),
-            'DummyClassDatatable' => app_path('Http/Datatables'),
+//            'DummyClassDatatable' => app_path('Http/Datatables'),
             'DummyClassRequest' => app_path('Http/Requests'),
             'DummyClassFactory' => database_path('factories'),
             'DummyClassSeeder' => database_path('seeders'),
