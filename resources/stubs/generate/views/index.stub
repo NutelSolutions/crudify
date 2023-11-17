@@ -48,7 +48,7 @@
                             @foreach ($DummyVars as $DummyVar)
                                 <tr class="border-b dark:border-gray-700">
                                     <th scope="row" class="px-4 py-3">{{ $DummyVar->id }}</th>
-                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $DummyVar->name }}</td>
+                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap max-w-[12rem] truncate dark:text-white">{{ $DummyVar->name }}</td>
                                     <td class="px-4 py-3">{{ $DummyVar->created_at }}</td>
                                     <td class="px-4 py-3">{{ $DummyVar->updated_at }}</td>
                                     <td class="px-4 py-3 flex items-center justify-end">

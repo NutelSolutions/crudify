@@ -41,10 +41,43 @@ class InstallsCrudify extends Command
 //        $this->insertJsResources();
 //        $this->insertSassResources();
 //        $this->insertNpmPackages();
+
+        $this->fixFormStyles();
+
+
         $this->executeNpmCommands();
+
+
+        $this->deleteFormFile();
+
+
 
         $this->info('Crudify installation complete.');
     }
+
+    private function fixFormStyles()
+    {
+        $stub_path = __DIR__ . '/../../resources/stubs/install/fields-styling.stub';
+        $stub_contents = file_get_contents($stub_path);
+        $script_path = resource_path('views/fields-styling.blade.php');
+
+        file_put_contents($script_path, $stub_contents);
+
+        $this->line('Created field styling view.');
+    }
+
+    private function deleteFormFile()
+    {
+        $file_path = resource_path('views/fields-styling.blade.php');
+
+        if (file_exists($file_path)) {
+            unlink($file_path);
+            $this->line('Deleted field styling view.');
+        } else {
+            $this->line('Field styling view does not exist.');
+        }
+    }
+
 
     private function replacePaginationScript()
     {
