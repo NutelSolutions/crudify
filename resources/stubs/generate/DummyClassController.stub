@@ -17,13 +17,13 @@ class DummyClassController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-        $DummyVar = DummyClass::query()
+        $DummyVars = DummyClass::query()
             ->when($search, function ($query) use ($search) {
                 return $query->where('name', 'like', '%' . $search . '%');
             })
             ->paginate(10);
 
-        return view('DummyVars.index', compact('DummyVar', 'search'));
+        return view('DummyVars.index', compact('DummyVars', 'search'));
     }
 
     public function create()

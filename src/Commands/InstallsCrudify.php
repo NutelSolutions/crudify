@@ -14,8 +14,8 @@ class InstallsCrudify extends Command
     public function handle()
     {
         // migrate and seed db
-        $this->updateDatabaseSeeder();
-        Artisan::call('migrate:fresh --seed', [], $this->getOutput());
+//        $this->updateDatabaseSeeder();
+//        Artisan::call('migrate:fresh --seed', [], $this->getOutput());
 
         // configure & generate ide helper file
         Artisan::call('vendor:publish --tag=config', [], $this->getOutput());
@@ -30,7 +30,7 @@ class InstallsCrudify extends Command
 
         Artisan::call(' vendor:publish --tag=laravel-pagination', [], $this->getOutput());
         // OVERWRITE THE DEFAULT.BLADE FILE
-
+        $this->replacePaginationScript();
 
 
 
@@ -41,9 +41,20 @@ class InstallsCrudify extends Command
 //        $this->insertJsResources();
 //        $this->insertSassResources();
 //        $this->insertNpmPackages();
-//        $this->executeNpmCommands();
+        $this->executeNpmCommands();
 
         $this->info('Crudify installation complete.');
+    }
+
+    private function replacePaginationScript()
+    {
+        $stub_path = __DIR__ . '/../../resources/stubs/install/default-pagination.stub';
+        $stub_contents = file_get_contents($stub_path);
+        $script_path = resource_path('views/vendor/pagination/default.blade.php');
+
+        file_put_contents($script_path, $stub_contents);
+
+        $this->line('Replaced default pagination view.');
     }
 
     private function updateDatabaseSeeder()
