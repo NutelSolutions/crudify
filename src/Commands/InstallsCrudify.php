@@ -66,10 +66,8 @@ class InstallsCrudify extends Command
             $stub_contents = $stub->getContents();
             $new_file = $view_path . '/' . str_replace('.stub', '.blade.php', $stub->getBasename());
 
-            $this->createFile($new_file, $stub_contents);
+            file_put_contents($new_file, $stub_contents);
         }
-
-        $this->line('Replaced Auth views.');
     }
 
     private function fixFormStyles()
