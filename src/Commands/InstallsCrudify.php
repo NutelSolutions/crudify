@@ -42,7 +42,9 @@ class InstallsCrudify extends Command
 //        $this->insertSassResources();
 //        $this->insertNpmPackages();
 
+        $this->tailwindConfig();
         $this->createAuthViewFiles();
+        $this->createAuthComponentFiles();
 
         $this->fixFormStyles();
 
@@ -67,7 +69,35 @@ class InstallsCrudify extends Command
             $new_file = $view_path . '/' . str_replace('.stub', '.blade.php', $stub->getBasename());
 
             file_put_contents($new_file, $stub_contents);
+
+            $this->line('Created auth views.');
         }
+    }
+
+    private function createAuthComponentFiles()
+    {
+        $view_path = resource_path('views/components');
+        File::ensureDirectoryExists($view_path);
+
+        foreach (File::allFiles(__DIR__ . '/../../resources/stubs/generate/components') as $stub) {
+            $stub_contents = $stub->getContents();
+            $new_file = $view_path . '/' . str_replace('.stub', '.blade.php', $stub->getBasename());
+
+            file_put_contents($new_file, $stub_contents);
+
+            $this->line('Created components.');
+        }
+    }
+
+    private function tailwindConfig()
+    {
+        $stub_path = __DIR__ . '/../../resources/stubs/generate/tailwind/tailwindconfig.stub';
+        $stub_contents = file_get_contents($stub_path);
+        $script_path = app_path('tailwind.config.js');
+
+        file_put_contents($script_path, $stub_contents);
+
+        $this->line('Created styling config.');
     }
 
     private function fixFormStyles()
