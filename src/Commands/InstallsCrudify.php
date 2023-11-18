@@ -93,7 +93,7 @@ class InstallsCrudify extends Command
     {
         $stub_path = __DIR__ . '/../../resources/stubs/generate/tailwind/tailwindconfig.stub';
         $stub_contents = file_get_contents($stub_path);
-        $script_path = app_path('tailwind.config.js');
+        $script_path = base_path('tailwind.config.js');
 
         file_put_contents($script_path, $stub_contents);
 
