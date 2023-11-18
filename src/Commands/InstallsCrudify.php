@@ -63,22 +63,13 @@ class InstallsCrudify extends Command
         File::ensureDirectoryExists($view_path);
 
         foreach (File::allFiles(__DIR__ . '/../../resources/stubs/generate/auth') as $stub) {
-            $stub_contents = $this->replace($stub->getContents());
+            $stub_contents = $stub->getContents();
             $new_file = $view_path . '/' . str_replace('.stub', '.blade.php', $stub->getBasename());
 
             $this->createFile($new_file, $stub_contents);
         }
 
         $this->line('Replaced Auth views.');
-    }
-
-    private function replace($contents)
-    {
-        foreach ($this->replaces as $search => $replace) {
-            $contents = str_replace($search, $replace, $contents);
-        }
-
-        return $contents;
     }
 
     private function fixFormStyles()
