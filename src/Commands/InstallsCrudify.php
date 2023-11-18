@@ -4,6 +4,7 @@ namespace Kejojedi\Crudify\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 class InstallsCrudify extends Command
@@ -29,7 +30,6 @@ class InstallsCrudify extends Command
 
 
         Artisan::call(' vendor:publish --tag=laravel-pagination', [], $this->getOutput());
-        // OVERWRITE THE DEFAULT.BLADE FILE
         $this->replacePaginationScript();
 
 
@@ -42,6 +42,8 @@ class InstallsCrudify extends Command
 //        $this->insertSassResources();
 //        $this->insertNpmPackages();
 
+        $this->createAuthViewFiles();
+
         $this->fixFormStyles();
 
 
@@ -53,6 +55,19 @@ class InstallsCrudify extends Command
 
 
         $this->info('Crudify installation complete.');
+    }
+
+    private function createAuthViewFiles()
+    {
+        $view_path = resource_path('views/auth');
+        File::ensureDirectoryExists($view_path);
+
+        foreach (File::allFiles(__DIR__ . '/../../resources/stubs/generate/auth') as $stub) {
+            $stub_contents = $this->replace($stub->getContents());
+            $new_file = $view_path . '/' . str_replace('.stub', '.blade.php', $stub->getBasename());
+
+            $this->createFile($new_file, $stub_contents);
+        }
     }
 
     private function fixFormStyles()
