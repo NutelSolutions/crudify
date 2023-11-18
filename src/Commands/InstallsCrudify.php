@@ -68,6 +68,17 @@ class InstallsCrudify extends Command
 
             $this->createFile($new_file, $stub_contents);
         }
+
+        $this->line('Replaced Auth views.');
+    }
+
+    private function replace($contents)
+    {
+        foreach ($this->replaces as $search => $replace) {
+            $contents = str_replace($search, $replace, $contents);
+        }
+
+        return $contents;
     }
 
     private function fixFormStyles()
