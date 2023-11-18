@@ -52,7 +52,7 @@ class InstallsCrudify extends Command
         $this->executeNpmCommands();
 
 
-        $this->deleteFormFile();
+//        $this->deleteFormFile();
 
 
 
@@ -64,14 +64,14 @@ class InstallsCrudify extends Command
         $view_path = resource_path('views/auth');
         File::ensureDirectoryExists($view_path);
 
-        foreach (File::allFiles(__DIR__ . '/../../resources/stubs/generate/auth') as $stub) {
+        foreach (File::allFiles(__DIR__ . '/../../resources/stubs/install/auth') as $stub) {
             $stub_contents = $stub->getContents();
             $new_file = $view_path . '/' . str_replace('.stub', '.blade.php', $stub->getBasename());
 
             file_put_contents($new_file, $stub_contents);
-
-            $this->line('Created auth views.');
         }
+
+        $this->line('Created auth views.');
     }
 
     private function createAuthComponentFiles()
@@ -79,19 +79,19 @@ class InstallsCrudify extends Command
         $view_path = resource_path('views/components');
         File::ensureDirectoryExists($view_path);
 
-        foreach (File::allFiles(__DIR__ . '/../../resources/stubs/generate/components') as $stub) {
+        foreach (File::allFiles(__DIR__ . '/../../resources/stubs/install/components') as $stub) {
             $stub_contents = $stub->getContents();
             $new_file = $view_path . '/' . str_replace('.stub', '.blade.php', $stub->getBasename());
 
             file_put_contents($new_file, $stub_contents);
-
-            $this->line('Created components.');
         }
+
+        $this->line('Created components.');
     }
 
     private function tailwindConfig()
     {
-        $stub_path = __DIR__ . '/../../resources/stubs/generate/tailwind/tailwindconfig.stub';
+        $stub_path = __DIR__ . '/../../resources/stubs/install/tailwind/tailwindconfig.stub';
         $stub_contents = file_get_contents($stub_path);
         $script_path = base_path('tailwind.config.js');
 
